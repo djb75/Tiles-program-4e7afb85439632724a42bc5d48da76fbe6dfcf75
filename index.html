@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosaic Image Editor</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f5;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            cursor: url('custom-cursor.png'), auto;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 2px;
+        }
+
+        .matrix-input {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            transform: translateY(-100px);
+            opacity: 0;
+            animation: dropIn 0.05s forwards;
+        }
+
+        @keyframes dropIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        #mosaic {
+            display: grid;
+            grid-template-columns: repeat(11, 50px);
+            grid-template-rows: repeat(14, 50px);
+            gap: 2px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .cell {
+            width: 50px;
+            height: 50px;
+            background-size: cover;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .cell:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .counter {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mosaic Image Editor</h1>
+    <div class="container">
+        <table id="matrix-editor">
+            <!-- Table rows and cells will be dynamically generated -->
+        </table>
+        <div id="mosaic"></div>
+    </div>
+    <div class="counter">
+        <span id="count-1-2">Number of 1s and 2s: 0</span><br>
+        <span id="count-3-4">Number of 3s and 4s: 0</span>
+    </div>
+    <button onclick="updateMosaic()">Update Mosaic</button>
+    <button onclick="randomizeMatrix()">Randomize Matrix</button>
+    <script src="mosaic.js"></script>
+</body>
+</html>
